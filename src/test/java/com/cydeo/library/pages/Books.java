@@ -1,6 +1,7 @@
 package com.cydeo.library.pages;
 
 import com.cydeo.library.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -25,7 +26,7 @@ public class Books {
     @FindBy(name = "year")
     public WebElement yearInputbox;
 
-    @FindBy(name = "author")
+    @FindBy(xpath = "//input[@placeholder='Author']")
     public WebElement authorInputbox;
 
     @FindBy(id = "description")
@@ -41,6 +42,13 @@ public class Books {
     @FindBy(xpath = "//button[@type='submit']")
     public WebElement saveChangesButton;
 
+    @FindBy(xpath = "//input[@type='search']")
+    public WebElement searchBox;
+
+    public WebElement editBookButton (String bookname){
+        String xPath = "//td[.='" + bookname + "']/../td/a";
+        return Driver.getDriver().findElement(By.xpath(xPath));
+    }
 
 
 

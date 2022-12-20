@@ -7,10 +7,10 @@ Feature: librarian adds book
     And user navigates to "Books" page
     And user clicks on AddBook button
     And user enters book information and clicks on Save changes button
-      | Book_name     | Arizona Yellowhood                                       |
-      | ISBN          | 612794620-4                                              |
-      | Year          | 2012                                                     |
-      | Author        | Lari Proctor                                             |
-      | Book_category | Drama                                                    |
-      | Description   | Lorem ipsum dolor sit amet, consectetur adipiscing elit. |
+      | Book_name     | Peace bird                  |
+      | ISBN          | 23459865-2                  |
+      | Year          | 2015                        |
+      | Author        | Lorry Young                 |
+      | Book_category | Poetry                      |
+      | Description   | Lorem ipsum dolor sit amet. |
     Then the book is on the list
