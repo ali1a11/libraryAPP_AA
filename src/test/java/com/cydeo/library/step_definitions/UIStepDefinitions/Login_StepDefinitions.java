@@ -1,4 +1,4 @@
-package com.cydeo.library.step_definitions;
+package com.cydeo.library.step_definitions.UIStepDefinitions;
 
 import com.cydeo.library.pages.DashboardPage;
 import com.cydeo.library.pages.LoginPage;

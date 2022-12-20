@@ -34,7 +34,7 @@
       When user enters username "<username>" password "<password>" and logins
       Then user should not be able to login on library app
 
-      Examples: students
+      Examples: wrong credentials
         | username           | password  |
         | student1@library   | WrongPass |
         | WrongUser@library  | 80qynl9d  |

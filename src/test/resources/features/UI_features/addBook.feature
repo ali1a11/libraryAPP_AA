@@ -7,10 +7,10 @@ Feature: librarian adds book
     And user navigates to "Books" page
     And user clicks on AddBook button
     And user enters book information and clicks on Save changes button
-      | Book_name     | Peace bird                  |
-      | ISBN          | 23459865-2                  |
-      | Year          | 2015                        |
-      | Author        | Lorry Young                 |
-      | Book_category | Poetry                      |
+      | Book_name     | Black eye                   |
+      | ISBN          | 1122558899                  |
+      | Year          | 2010                        |
+      | Author        | Henry King                  |
+      | Book_category | Drama                       |
       | Description   | Lorem ipsum dolor sit amet. |
     Then the book is on the list
