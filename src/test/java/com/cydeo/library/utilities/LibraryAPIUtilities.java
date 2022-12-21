@@ -23,6 +23,31 @@ public class LibraryAPIUtilities {
         return token;
     }
 
+    public static String getStudentToken (){
+
+        String token = given()
+                .and().accept(ContentType.JSON)
+                .and().formParam("email", ConfigurationReader.getProperty("student_username"))
+                .and().formParam("password", ConfigurationReader.getProperty("student_password"))
+                .when().post("https://library1.cydeo.com/rest/v1/login")
+                .body().path("token");
+        return token;
+    }
+
+
+    public static String getLibrarianToken (){
+
+        String token = given()
+                .and().accept(ContentType.JSON)
+                .and().formParam("email", ConfigurationReader.getProperty("librarian_username"))
+                .and().formParam("password", ConfigurationReader.getProperty("librarian_password"))
+                .when().post("https://library1.cydeo.com/rest/v1/login")
+                .body().path("token");
+        return token;
+    }
+
+
+
 
     private static Response response;
 
@@ -55,7 +80,21 @@ public class LibraryAPIUtilities {
             user.put("address", userAddress);
 
             return user;
+        }
 
+        public static int getBorrowableBook(){
+
+            String studentToken = LibraryAPIUtilities.getToken(ConfigurationReader.getProperty("student_username"), ConfigurationReader.getProperty("student_password"));
+
+        Response response = given().accept(ContentType.JSON)
+                .header("x-library-token", studentToken)
+                .get("https://library1.cydeo.com/rest/v1/get_book_list_for_borrowing");
+
+        String stringID = response.path("id[0]");
+
+        int id = Integer.parseInt(stringID);
+
+        return id;
         }
 
 
