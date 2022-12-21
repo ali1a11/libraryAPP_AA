@@ -1,6 +1,5 @@
 package com.cydeo.library.step_definitions.APIStepDefinitions;
 
-
 import com.cydeo.library.utilities.LibraryAPIUtilities;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,7 +11,7 @@ import org.junit.Assert;
 
 import static io.restassured.RestAssured.*;
 
-public class APIStepDefinitions extends APITestBase{
+public class APILoginStepDefinitions extends APITestBase{
 
     String token = "";
     Response response;
