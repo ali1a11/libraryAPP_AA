@@ -1,7 +1,7 @@
 
   Feature: Library app login feature
 
-    User Story: As as user, I should be able to login with correct credentials to librarian and student accounts.
+    User Story: As a user, I should be able to login with correct credentials to librarian and student accounts.
 
 
     Scenario Outline: login
