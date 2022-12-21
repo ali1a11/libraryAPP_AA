@@ -22,8 +22,6 @@ public class AddBookStepDefinitions {
 
         String librarianToken = LibraryAPIUtilities.getToken(ConfigurationReader.getProperty("librarian_username"), ConfigurationReader.getProperty("librarian_password"));
 
-        System.out.println("librarianToken = " + librarianToken);
-
         response = given().header("x-library-token", librarianToken)
                 .and().accept(ContentType.JSON)
                 .formParams(bookInfo)

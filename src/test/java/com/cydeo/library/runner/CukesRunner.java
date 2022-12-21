@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = "com/cydeo/library/step_definitions",
-        tags = "@addBookAPI",// @LoginUsingFile    @students @librarians @login-api
-        dryRun = false
+        tags = "@addUserAPI",// @LoginUsingFile    @students @librarians @login-api
+        dryRun = true
         )
 
 public class CukesRunner {
