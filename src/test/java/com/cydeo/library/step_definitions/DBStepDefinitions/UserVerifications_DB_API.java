@@ -13,7 +13,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class LoginVerifications {
+public class UserVerifications_DB_API {
 
     String token;
     Response response;
@@ -43,17 +43,12 @@ public class LoginVerifications {
         email_API = response.path("email");
         userGroupID_API = response.path("user_group_id");
 
-        System.out.println("fullName_API = " + fullName_API);
-
     }
 
     @Then("the current user information from API and database should match")
     public void the_current_user_information_from_api_and_database_should_match() {
 
         String query = "select id, full_name, email, user_group_id from users where email= '"+ email_API +"'";
-
-        DBUtils.createConnection();
-
 
         Map<String, Object> dbRowMap = DBUtils.getRowMap(query);
 
@@ -70,11 +65,6 @@ public class LoginVerifications {
         Assert.assertEquals(email_DB, email_API);
         Assert.assertEquals(userGroupID_DB, userGroupID_API);
 
-
-
-
-
-        DBUtils.destroyConnection();
     }
 
 

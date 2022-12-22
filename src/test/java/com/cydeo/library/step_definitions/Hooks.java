@@ -1,4 +1,4 @@
-/*
+
 package com.cydeo.library.step_definitions;
 
 import com.cydeo.library.utilities.DBUtils;
@@ -16,13 +16,13 @@ public class Hooks {
 
 	@Before("@db")
 	public void dbHook() {
-		System.out.println("creating database connection");
+		System.out.println("\ncreating database connection !!! 111 DB 111 !!!\n");
 		DBUtils.createConnection();
 	}
 	
 	@After("@db")
 	public void afterDbHook() {
-		System.out.println("closing database connection");
+		System.out.println("\nclosing database connection  !!! 000 DB 000 !!!\n");
 		DBUtils.destroyConnection();
 
 	}
@@ -45,10 +45,6 @@ public class Hooks {
 		}
 		Driver.closeDriver();
 	}
-	
-	
-	
-	
-	
+
+
 }
-*/

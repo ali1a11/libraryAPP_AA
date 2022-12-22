@@ -1,6 +1,6 @@
-Feature: User verification
+Feature: User verification DB-API
 
-  @DB-API @db
+  @WIPDB-API @db
   Scenario Outline: Verify user information from API and database
     Given user login API using "<username>" "<password>"
     When I get the current user information from API
