@@ -1,6 +1,6 @@
 package com.cydeo.library.step_definitions.APIStepDefinitions;
 
-import com.cydeo.library.utilities.LibraryAPIUtilities;
+import com.cydeo.library.utilities.APIUtilities;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.http.ContentType;
@@ -18,8 +18,8 @@ public class APILoginStepDefinitions extends APITestBase{
     @Given("get token with {string} and {string}")
     public void get_token_with_and(String username, String password) {
 
-        token = LibraryAPIUtilities.getToken(username, password);
-        response = LibraryAPIUtilities.getResponse(username, password);
+        token = APIUtilities.getToken(username, password);
+        response = APIUtilities.getResponse(username, password);
 
     }
     @Then("status code should be {int}")

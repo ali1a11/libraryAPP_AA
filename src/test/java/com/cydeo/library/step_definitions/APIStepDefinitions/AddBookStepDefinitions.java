@@ -1,7 +1,7 @@
 package com.cydeo.library.step_definitions.APIStepDefinitions;
 
 import com.cydeo.library.utilities.ConfigurationReader;
-import com.cydeo.library.utilities.LibraryAPIUtilities;
+import com.cydeo.library.utilities.APIUtilities;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.http.ContentType;
@@ -20,7 +20,7 @@ public class AddBookStepDefinitions {
     @Given("librarian makes POST request to add book")
     public void librarian_makes_post_request_to_add_book(Map<String, String> bookInfo) {
 
-        String librarianToken = LibraryAPIUtilities.getToken(ConfigurationReader.getProperty("librarian_username"), ConfigurationReader.getProperty("librarian_password"));
+        String librarianToken = APIUtilities.getToken(ConfigurationReader.getProperty("librarian_username"), ConfigurationReader.getProperty("librarian_password"));
 
         response = given().header("x-library-token", librarianToken)
                 .and().accept(ContentType.JSON)
@@ -50,7 +50,7 @@ public class AddBookStepDefinitions {
 
     @Given("student makes POST request to add book")
     public void student_makes_post_request_to_add_book(Map<String, String> bookInfo) {
-        String studentToken = LibraryAPIUtilities.getToken(ConfigurationReader.getProperty("student_username"), ConfigurationReader.getProperty("student_password"));
+        String studentToken = APIUtilities.getToken(ConfigurationReader.getProperty("student_username"), ConfigurationReader.getProperty("student_password"));
 
         System.out.println("studentToken = " + studentToken);
 

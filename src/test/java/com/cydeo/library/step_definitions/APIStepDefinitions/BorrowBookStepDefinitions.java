@@ -1,6 +1,6 @@
 package com.cydeo.library.step_definitions.APIStepDefinitions;
 
-import com.cydeo.library.utilities.LibraryAPIUtilities;
+import com.cydeo.library.utilities.APIUtilities;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.http.ContentType;
@@ -17,9 +17,9 @@ Response response;
     public void the_user_as_a_student_makes_post_request_to_borrow_a_book_with_user_id(int userID) {
 
 
-        int bookIDtoBorrow = LibraryAPIUtilities.getBorrowableBook();
+        int bookIDtoBorrow = APIUtilities.getBorrowableBook();
 
-         response = given().header("x-library-token", LibraryAPIUtilities.getStudentToken())
+         response = given().header("x-library-token", APIUtilities.getStudentToken())
                 .and().accept(ContentType.JSON)
                 .contentType("application/x-www-form-urlencoded")
                 .formParam("book_id", bookIDtoBorrow)

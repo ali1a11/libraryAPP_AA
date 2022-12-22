@@ -1,6 +1,6 @@
 package com.cydeo.library.step_definitions.APIStepDefinitions;
 
-import com.cydeo.library.utilities.LibraryAPIUtilities;
+import com.cydeo.library.utilities.APIUtilities;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.http.ContentType;
@@ -21,9 +21,9 @@ public class GETBookCategories {
         String token = "";
 
         if (userType.toLowerCase().equals("librarian")) {
-            token = LibraryAPIUtilities.getLibrarianToken();
+            token = APIUtilities.getLibrarianToken();
         } else if (userType.toLowerCase().equals("student")) {
-            token = LibraryAPIUtilities.getStudentToken();
+            token = APIUtilities.getStudentToken();
         }
 
         response = given().accept(ContentType.JSON)

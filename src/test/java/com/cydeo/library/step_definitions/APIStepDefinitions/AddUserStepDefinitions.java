@@ -1,14 +1,12 @@
 package com.cydeo.library.step_definitions.APIStepDefinitions;
 
 import com.cydeo.library.utilities.ConfigurationReader;
-import com.cydeo.library.utilities.LibraryAPIUtilities;
+import com.cydeo.library.utilities.APIUtilities;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
-
-import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,7 +17,7 @@ public class AddUserStepDefinitions {
     @Given("librarian adds new {string} user")
     public void librarian_adds_new_user(String userType) {
 
-        String librarianToken = LibraryAPIUtilities.getToken(ConfigurationReader.getProperty("librarian_username"), ConfigurationReader.getProperty("librarian_password"));
+        String librarianToken = APIUtilities.getToken(ConfigurationReader.getProperty("librarian_username"), ConfigurationReader.getProperty("librarian_password"));
 
         int userGroup = 1;
 
@@ -33,7 +31,7 @@ public class AddUserStepDefinitions {
 
         response = given().header("x-library-token", librarianToken)
                 .and().accept(ContentType.JSON)
-                .formParams(LibraryAPIUtilities.createUser(userGroup))
+                .formParams(APIUtilities.createUser(userGroup))
                 .when().post("https://library1.cydeo.com/rest/v1/add_user")
                 .prettyPeek();
     }
@@ -48,7 +46,7 @@ public class AddUserStepDefinitions {
     @Given("student adds new {string} user")
     public void student_adds_new_user(String userType) {
 
-        String studentToken = LibraryAPIUtilities.getToken(ConfigurationReader.getProperty("student_username"), ConfigurationReader.getProperty("student_password"));
+        String studentToken = APIUtilities.getToken(ConfigurationReader.getProperty("student_username"), ConfigurationReader.getProperty("student_password"));
 
         int userGroup = 1;
 
@@ -62,7 +60,7 @@ public class AddUserStepDefinitions {
 
         response = given().header("x-library-token", studentToken)
                 .and().accept(ContentType.JSON)
-                .formParams(LibraryAPIUtilities.createUser(userGroup))
+                .formParams(APIUtilities.createUser(userGroup))
                 .when().post("https://library1.cydeo.com/rest/v1/add_user")
                 .prettyPeek();
 

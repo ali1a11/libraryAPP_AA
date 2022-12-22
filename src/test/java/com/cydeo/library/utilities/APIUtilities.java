@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class LibraryAPIUtilities {
+public class APIUtilities {
 
     public static String getToken (String email, String password){
 
@@ -84,7 +84,7 @@ public class LibraryAPIUtilities {
 
         public static int getBorrowableBook(){
 
-            String studentToken = LibraryAPIUtilities.getToken(ConfigurationReader.getProperty("student_username"), ConfigurationReader.getProperty("student_password"));
+            String studentToken = APIUtilities.getToken(ConfigurationReader.getProperty("student_username"), ConfigurationReader.getProperty("student_password"));
 
         Response response = given().accept(ContentType.JSON)
                 .header("x-library-token", studentToken)
