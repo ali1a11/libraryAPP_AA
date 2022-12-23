@@ -10,6 +10,6 @@ Feature: User verification DB-API
       | username         | password |
       | student1@library | i2A9TgXa |
       | student2@library | 80qynl9d |
-      | library1@library | rs4BNN9G |
+#      | library1@library | rs4BNN9G |
 
 
