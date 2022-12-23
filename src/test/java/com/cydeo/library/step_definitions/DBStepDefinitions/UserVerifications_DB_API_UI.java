@@ -1,7 +1,11 @@
 package com.cydeo.library.step_definitions.DBStepDefinitions;
 
+import com.cydeo.library.pages.DashboardPage;
+import com.cydeo.library.pages.LoginPage;
 import com.cydeo.library.utilities.APIUtilities;
+import com.cydeo.library.utilities.ConfigurationReader;
 import com.cydeo.library.utilities.DBUtils;
+import com.cydeo.library.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,6 +13,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
 
@@ -23,12 +29,20 @@ public class UserVerifications_DB_API {
     String email_API = "";
     String userGroupID_API = "";
 
+    String id_DB = "";
+    String fullName_DB = "";
+    String email_DB = "";
+    String userGroupID_DB = "";
+    String fullName_UI;
+
+    DashboardPage dashboardPage = new DashboardPage();
+
 
     @Given("user login API using {string} {string}")
     public void user_login_api_using(String username, String password) {
         token = APIUtilities.getToken(username, password);
         String bearerToken = "Bearer " + token;
-                response = given().accept(ContentType.JSON)
+        response = given().accept(ContentType.JSON)
                 .and().contentType("application/x-www-form-urlencoded")
                 .header("Authorization", bearerToken)
                 .formParam("token", token)
@@ -37,49 +51,74 @@ public class UserVerifications_DB_API {
     }
 
 
-
-    @When("I get the current user information from API")
-    public void i_get_the_current_user_information_from_api() {
+    @When("user gets the user information from API")
+    public void user_gets_the_user_information_from_api() {
         id_API = response.path("id");
         fullName_API = response.path("full_name");
         email_API = response.path("email");
         userGroupID_API = response.path("user_group_id");
     }
 
-    @Then("the current user information from API and database should match")
-    public void the_current_user_information_from_api_and_database_should_match() {
+    @When("user gets the user information from DB")
+    public void user_gets_the_user_information_from_db() {
 
-        String query = "select id, full_name, email, user_group_id from users where email= '"+ email_API +"'";
+        String query = "select id, full_name, email, user_group_id from users where email= '" + email_API + "'";
 
         Map<String, Object> dbRowMap = DBUtils.getRowMap(query);
 
         System.out.println("dbRowMap = " + dbRowMap);
 
         Long id_DBL = (Long) dbRowMap.get("id");
-        String id_DB = Long.toString(id_DBL);
-        String fullName_DB = (String) dbRowMap.get("full_name");
-        String email_DB = (String) dbRowMap.get("email");
+        id_DB = Long.toString(id_DBL);
+        fullName_DB = (String) dbRowMap.get("full_name");
+        email_DB = (String) dbRowMap.get("email");
         Integer userGroupID_DBi = (Integer) dbRowMap.get("user_group_id");
-        String userGroupID_DB = Integer.toString(userGroupID_DBi);
+        userGroupID_DB = Integer.toString(userGroupID_DBi);
+    }
+
+
+    @Then("the current user information from API and database should match")
+    public void the_current_user_information_from_api_and_database_should_match() {
+
         Assert.assertEquals(id_DB, id_API);
         Assert.assertEquals(fullName_DB, fullName_API);
         Assert.assertEquals(email_DB, email_API);
         Assert.assertEquals(userGroupID_DB, userGroupID_API);
     }
 
+    @Given("user gets the user information from UI")
+    public void user_gets_the_user_information_from_ui() {
+
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        wait.until(ExpectedConditions.visibilityOf(dashboardPage.userFullName));
+
+        fullName_UI = dashboardPage.userFullName.getText();
+    }
+
+    @Then("UI, API and Database user information must be match with {string}")
+    public void ui_api_and_database_user_information_must_be_match_with(String expectedName) {
+        System.out.println("fullName_UI = " + fullName_UI);
+        System.out.println("fullName_API = " + fullName_API);
+        System.out.println("fullName_DB = " + fullName_DB);
+
+        Assert.assertEquals(expectedName, fullName_UI);
+        Assert.assertEquals(expectedName, fullName_API);
+        Assert.assertEquals(expectedName, fullName_DB);
+    }
+
 
     @Test
-    public void test1(){
-        String studentUsername ="student1@library";
-        String studentPassword ="i2A9TgXa";
+    public void test1() {
+        String studentUsername = "student1@library";
+        String studentPassword = "i2A9TgXa";
 
-        String librarianUsername ="librarian1@library";
-        String librarianPassword ="rs4BNN9G";
+        String librarianUsername = "librarian1@library";
+        String librarianPassword = "rs4BNN9G";
 
         String studentToken = APIUtilities.getToken(studentUsername, studentPassword);
 
         String studentbearerToken = "Bearer " + studentToken;
-        Response studentResponse  = given().accept(ContentType.JSON)
+        Response studentResponse = given().accept(ContentType.JSON)
                 .and().contentType("application/x-www-form-urlencoded")
                 .header("Authorization", studentbearerToken)
                 .formParam("token", studentToken)
@@ -94,7 +133,7 @@ public class UserVerifications_DB_API {
         String librarianToken = APIUtilities.getToken(librarianUsername, librarianPassword);
 
         String librarianbearerToken = "Bearer " + studentToken;
-        Response librarianResponse  = given().accept(ContentType.JSON)
+        Response librarianResponse = given().accept(ContentType.JSON)
                 .and().contentType("application/x-www-form-urlencoded")
                 .header("Authorization", librarianbearerToken)
                 .formParam("token", librarianToken)
@@ -109,7 +148,7 @@ public class UserVerifications_DB_API {
         // DB
         DBUtils.createConnection();
 
-        String query = "select id, full_name, email, user_group_id from users where email= '"+ studentUsername +"'";
+        String query = "select id, full_name, email, user_group_id from users where email= '" + studentUsername + "'";
 
         Map<String, Object> dbMapStudent = DBUtils.getRowMap(query);
 
@@ -132,7 +171,7 @@ public class UserVerifications_DB_API {
 
         DBUtils.createConnection();
 
-        String query2 = "select id, full_name, email, user_group_id from users where email= '"+ librarianUsername +"'";
+        String query2 = "select id, full_name, email, user_group_id from users where email= '" + librarianUsername + "'";
 
         Map<String, Object> dbMaplibrarian = DBUtils.getRowMap(query2);
 
