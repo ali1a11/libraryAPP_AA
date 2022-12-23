@@ -11,8 +11,6 @@ public class APITestBase {
         //save baseURI inside this variable so that we don't need to type each html method
         RestAssured.baseURI = "https://library1.cydeo.com";
 
-
-
     }
 
 }

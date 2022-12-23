@@ -7,6 +7,7 @@ import io.restassured.http.ContentType;
 
 import io.restassured.response.*;
 import org.junit.Assert;
+import org.junit.Test;
 
 
 import static io.restassured.RestAssured.*;
@@ -22,6 +23,8 @@ public class APILoginStepDefinitions extends APITestBase{
         response = APIUtilities.getResponse(username, password);
 
     }
+
+
     @Then("status code should be {int}")
     public void status_code_should_be(Integer statusCode) {
 

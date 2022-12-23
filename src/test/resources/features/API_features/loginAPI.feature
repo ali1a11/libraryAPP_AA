@@ -9,7 +9,7 @@ Feature: Login in API
       | username           | password |
       | librarian1@library | rs4BNN9G |
       | librarian2@library | eb2VQKEj |
-#      | student6@library   | P2OEdBiW |
+      | student6@library   | P2OEdBiW |
 
 
   Scenario Outline: User cannot get token with invalid credentials <username> <password>

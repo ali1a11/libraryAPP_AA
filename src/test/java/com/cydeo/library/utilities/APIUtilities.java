@@ -15,6 +15,7 @@ public class APIUtilities {
 
         String token = given()
                 .and().accept(ContentType.JSON)
+                .and().contentType("application/x-www-form-urlencoded")
                 .and().formParam("email", email)
                 .and().formParam("password", password)
                 .when().post("https://library1.cydeo.com/rest/v1/login")
@@ -34,6 +35,18 @@ public class APIUtilities {
         return token;
     }
 
+    public static String getStudentToken (String email, String password){
+
+        String token = given()
+                .and().accept(ContentType.JSON)
+                .and().formParam("email", email)
+                .and().formParam("password", password)
+                .when().post("https://library1.cydeo.com/rest/v1/login")
+                .body().path("token");
+        return token;
+    }
+
+
 
     public static String getLibrarianToken (){
 
@@ -41,6 +54,17 @@ public class APIUtilities {
                 .and().accept(ContentType.JSON)
                 .and().formParam("email", ConfigurationReader.getProperty("librarian_username"))
                 .and().formParam("password", ConfigurationReader.getProperty("librarian_password"))
+                .when().post("https://library1.cydeo.com/rest/v1/login")
+                .body().path("token");
+        return token;
+    }
+
+    public static String getLibrarianToken (String email, String password){
+
+        String token = given()
+                .and().accept(ContentType.JSON)
+                .and().formParam("email", email)
+                .and().formParam("password", password)
                 .when().post("https://library1.cydeo.com/rest/v1/login")
                 .body().path("token");
         return token;
@@ -60,6 +84,28 @@ public class APIUtilities {
                 .when().post("https://library1.cydeo.com/rest/v1/login");
         return response;
         }
+
+    public static Response getStudentResponse(String email, String password) {
+
+        response = given()
+                .and().accept(ContentType.JSON)
+                .and().formParam("email", email)
+                .and().formParam("password", password)
+                .when().post("https://library1.cydeo.com/rest/v1/login");
+        return response;
+    }
+
+    public static Response getLibrarianResponse(String email, String password) {
+
+        response = given()
+                .and().accept(ContentType.JSON)
+                .and().formParam("email", email)
+                .and().formParam("password", password)
+                .when().post("https://library1.cydeo.com/rest/v1/login");
+        return response;
+    }
+
+
 
         public static Map<String, Object> createUser (int userGroup) {
             Faker faker = new Faker();
