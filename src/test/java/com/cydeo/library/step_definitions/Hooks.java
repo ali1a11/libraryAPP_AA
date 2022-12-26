@@ -7,6 +7,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
+import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -28,10 +29,11 @@ public class Hooks {
 
 	}
 	
-	@Before ("@ui")
+	@Before
 	public void setUp() {
 		// we put a logic that should apply to every scenario
 		Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		RestAssured.baseURI= "http://library1.cydeo.com/rest/v1";
 
 	}
 	
