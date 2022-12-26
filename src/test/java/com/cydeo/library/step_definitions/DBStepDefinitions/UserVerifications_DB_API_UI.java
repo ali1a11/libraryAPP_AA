@@ -1,9 +1,7 @@
 package com.cydeo.library.step_definitions.DBStepDefinitions;
 
 import com.cydeo.library.pages.DashboardPage;
-import com.cydeo.library.pages.LoginPage;
 import com.cydeo.library.utilities.APIUtilities;
-import com.cydeo.library.utilities.ConfigurationReader;
 import com.cydeo.library.utilities.DBUtils;
 import com.cydeo.library.utilities.Driver;
 import io.cucumber.java.en.Given;
@@ -20,7 +18,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 
-public class UserVerifications_DB_API {
+public class UserVerifications_DB_API_UI {
 
     String token;
     Response response;

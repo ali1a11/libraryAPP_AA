@@ -12,27 +12,25 @@ import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
 
-public class APILoginStepDefinitions extends APITestBase{
+public class APILoginStepDefinitions extends APITestBase {
 
     String token = "";
     Response response;
+
     @Given("get token with {string} and {string}")
     public void get_token_with_and(String username, String password) {
 
         token = APIUtilities.getToken(username, password);
         response = APIUtilities.getResponse(username, password);
-
     }
 
 
     @Then("status code should be {int}")
-    public void status_code_should_be(Integer statusCode) {
-
-        response = given().header("x-library-token", token)
-                .and().accept(ContentType.JSON)
-                .when().get("https://library1.cydeo.com/rest/v1/get_all_users")
-                .then().statusCode(statusCode).extract().response();
+    public void status_code_should_be(int statusCode) {
+        Assert.assertEquals(statusCode, response.statusCode());
     }
+
+
 
     @Then("response body returns error {string} and status code should be {int}")
     public void response_body_returns_error_and_status_code_should_be(String body, Integer statusCode) {
@@ -42,11 +40,9 @@ public class APILoginStepDefinitions extends APITestBase{
         System.out.println("response.statusCode() = " + response.statusCode());
 
         Assert.assertEquals(body, response.path("error"));
-        Assert.assertEquals((int)statusCode, response.statusCode());
-
+        Assert.assertEquals((int) statusCode, response.statusCode());
 
     }
-
 
 
 }

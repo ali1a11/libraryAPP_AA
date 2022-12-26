@@ -5,6 +5,7 @@ import com.cydeo.library.utilities.DBUtils;
 import com.cydeo.library.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -27,7 +28,7 @@ public class Hooks {
 
 	}
 	
-	@Before("@ui")
+	@Before ("@ui")
 	public void setUp() {
 		// we put a logic that should apply to every scenario
 		Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

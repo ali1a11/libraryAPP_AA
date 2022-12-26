@@ -3,7 +3,7 @@
 
     User Story: As a user, I should be able to login with correct credentials to librarian and student accounts.
 
-
+    @login
     Scenario Outline: login
       Given user is on the library login page
       When user enters username "<username>" password "<password>" and logins

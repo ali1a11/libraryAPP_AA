@@ -21,6 +21,15 @@ public class DashboardPage {
     @FindBy(xpath = "//*[.='Books']")
     public WebElement booksButton;
 
+    @FindBy(id="user_count")
+    public WebElement usersCount;
+
+    @FindBy (id="book_count")
+    public WebElement booksCount;
+
+    @FindBy(id="borrowed_books")
+    public WebElement borrowedBooksCount;
+
 
 
 

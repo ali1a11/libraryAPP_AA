@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                 "html:target/default-html-reports"},
         features = "src/test/resources/features",
         glue = "com/cydeo/library/step_definitions",
-        tags = "@WIP_DB-API",
+        tags = "@dashboard", //@WIP_DB-API @students @WIP @bookVerification@WIP_DB-API-UI
         dryRun = false
         )
 
